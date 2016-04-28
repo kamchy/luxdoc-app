@@ -19,6 +19,6 @@ public class SpringCurrentUserProviderImpl implements CurrentUserProvider {
         Collection<? extends GrantedAuthority> authorities = SecurityContextHolder.getContext().getAuthentication().getAuthorities();
         if (!authorities.stream().filter(a -> a.getAuthority().equalsIgnoreCase(roleName)).findFirst().isPresent()){
             throw new RuntimeException("Does not have a role " + roleName);
-        };
+        }
     }
 }

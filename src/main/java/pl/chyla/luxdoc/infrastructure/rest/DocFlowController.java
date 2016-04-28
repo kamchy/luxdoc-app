@@ -1,15 +1,16 @@
 package pl.chyla.luxdoc.infrastructure.rest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-import pl.chyla.luxdoc.application.docflow.DocRepo;
+import pl.chyla.luxdoc.application.docfinder.DocFinder;
 import pl.chyla.luxdoc.application.docflow.DocflowService;
-import pl.chyla.luxdoc.application.docflow.QDocument;
 
-import javax.websocket.server.PathParam;
+import java.net.URI;
+import java.util.Map;
 import java.util.UUID;
 
 /**
@@ -19,21 +20,27 @@ import java.util.UUID;
 @RequestMapping("/documents")
 public class DocFlowController {
     private final DocflowService docFlowService;
-    private final DocRepo docReposi;
+    private final DocFinder docFinder;
 
     @Autowired
-    public DocFlowController(DocflowService dfService, DocRepo docRepo) {
+    public DocFlowController(DocflowService dfService, DocFinder docFinder) {
         docFlowService = dfService;
-        docReposi = docRepo;
+        this.docFinder = docFinder;
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    UUID createDocument() {
-        return docFlowService.create();
+    ResponseEntity createDocument() {
+        UUID uuid = docFlowService.create();
+        return ResponseEntity.created(URI.create("/documents/" + uuid)).build();
     }
 
     @RequestMapping("/{uuid}")
-    QDocument getDocument(@PathVariable("uuid") UUID uuid) {
-        return docReposi.load(uuid);
+    Map<String, String> getDocument(@PathVariable("uuid") UUID uuid) {
+        return docFinder.findOne(uuid);
+    }
+
+    @RequestMapping("/{uuid}/{kind}")
+    Map<String, String> getDocumentSimple(@PathVariable("uuid") UUID uuid, @PathVariable("kind") String kind) {
+        return docFinder.findOne(uuid, kind);
     }
 }

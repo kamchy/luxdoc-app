@@ -6,9 +6,6 @@ import org.springframework.stereotype.Component;
 import pl.chyla.luxdoc.application.config.ConfigurationProvider;
 import pl.chyla.luxdoc.application.docflow.QualitySystem;
 
-/**
- * Created by Luxoft on 4/27/2016.
- */
 @Component
 public class ConfigurationProviderImpl implements ConfigurationProvider {
 
