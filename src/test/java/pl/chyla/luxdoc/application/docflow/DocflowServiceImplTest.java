@@ -3,6 +3,7 @@
 import org.junit.Test;
 import org.mockito.Mockito;
 import pl.chyla.luxdoc.application.config.ConfigurationProvider;
+import pl.chyla.luxdoc.application.config.DefaultContentProvider;
 import pl.chyla.luxdoc.application.sec.CurrentUserProvider;
 
 import java.util.UUID;
@@ -27,10 +28,14 @@ public class DocflowServiceImplTest {
         DocRepo repo = createTestRepo();
 
         ConfigurationProvider config = Mockito.mock(ConfigurationProvider.class);
-        DocflowServiceImpl impl = new DocflowServiceImpl(repo, provider, config);
+        DocflowServiceImpl impl = new DocflowServiceImpl(repo, provider, config, defTextMock());
         impl.create();
 
         assertTrue(repo.load(UUID.randomUUID()) != null);
+    }
+
+    private DefaultContentProvider defTextMock() {
+        return Mockito.mock(DefaultContentProvider.class);
     }
 
     @Test(expected = RuntimeException.class)
@@ -41,7 +46,7 @@ public class DocflowServiceImplTest {
         DocRepo repo = createTestRepo();
 
         ConfigurationProvider config = Mockito.mock(ConfigurationProvider.class);
-        DocflowServiceImpl impl = new DocflowServiceImpl(repo, provider, config);
+        DocflowServiceImpl impl = new DocflowServiceImpl(repo, provider, config, defTextMock());
         impl.create();
     }
 
@@ -53,7 +58,7 @@ public class DocflowServiceImplTest {
         CurrentUserProvider provider = Mockito.mock(CurrentUserProvider.class);
         ConfigurationProvider config = Mockito.mock(ConfigurationProvider.class);
         when(config.getQualitySystem()).thenReturn(QualitySystem.ISO);
-        DocflowServiceImpl impl = new DocflowServiceImpl(repo, provider, config);
+        DocflowServiceImpl impl = new DocflowServiceImpl(repo, provider, config, defTextMock());
         impl.create();
 
         QDocument doc = repo.load(UUID.randomUUID());
@@ -64,8 +69,9 @@ public class DocflowServiceImplTest {
         return new DocRepo() {
             private QDocument last;
             @Override
-            public void save(QDocument qDocument) {
+            public UUID save(QDocument qDocument) {
                 last = qDocument;
+                return UUID.randomUUID();
             }
 
             @Override
