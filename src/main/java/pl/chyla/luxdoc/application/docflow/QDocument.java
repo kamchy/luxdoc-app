@@ -1,12 +1,23 @@
 package pl.chyla.luxdoc.application.docflow;
 
+import javax.persistence.*;
 import java.util.UUID;
 
+@Entity
 public class QDocument {
-    private final QualitySystem qualitySystem;
-    private final UUID uuid;
+    @Column(name = "type")
+    @Enumerated(EnumType.STRING)
+    private QualitySystem qualitySystem;
+    @Id
+    @Column(name = "uuid")
+    private UUID uuid;
+    @Column(name = "content")
     private String content;
 
+
+    public QDocument(){
+        // required by jpa
+    }
     public QDocument(QualitySystem system, UUID id) {
         this.qualitySystem = system;
         this.content = "";
@@ -24,6 +35,7 @@ public class QDocument {
     public String getContent() {
         return content;
     }
+
 
     public UUID getUuid() {
         return uuid;

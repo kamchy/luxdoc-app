@@ -28,6 +28,12 @@ public class DocFinderImpl implements  DocFinder {
         }
     }
 
+    @Override
+    public Iterable<QDocument> findAll() {
+        return repository.findAll();
+    }
+
+
     private Map<String, String> toMap(QDocument load) {
 
         Map<String, String> m = new HashMap<String, String>();

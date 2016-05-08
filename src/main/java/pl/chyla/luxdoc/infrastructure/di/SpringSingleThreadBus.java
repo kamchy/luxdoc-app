@@ -1,7 +1,6 @@
 package pl.chyla.luxdoc.infrastructure.di;
 
 import org.springframework.context.ApplicationEventPublisher;
-import org.springframework.stereotype.Component;
 import pl.chyla.luxdoc.application.docflow.event.DocEvent;
 import pl.chyla.luxdoc.application.docflow.event.EventBus;
 

@@ -1,5 +1,6 @@
  package pl.chyla.luxdoc.application.docflow;
 
+import org.assertj.core.util.Lists;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.mockito.Mockito;
@@ -87,6 +88,11 @@ public class DocflowServiceImplTest {
             @Override
             public QDocument load(UUID docId) {
                 return last;
+            }
+
+            @Override
+            public Iterable<QDocument> findAll() {
+                return Lists.newArrayList(last);
             }
         };
     }

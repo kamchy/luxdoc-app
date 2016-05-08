@@ -3,6 +3,7 @@ package pl.chyla.luxdoc.infrastructure.persistance.docfinder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import pl.chyla.luxdoc.application.docfinder.DocFinder;
+import pl.chyla.luxdoc.application.docflow.QDocument;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -29,7 +30,12 @@ public class SimpleDocFinder implements DocFinder {
 
     @Override
     public Map<String, String> findOne(UUID uuid, String projection) {
-        Map<String, Object> res = template.queryForMap("select " + projections.get(projection) + " from qdoc");
+        Map<String, Object> res = template.queryForMap("select " + projections.get(projection) + " from qdoc" );
         return res.entrySet().stream().collect(Collectors.toMap(Map.Entry::getKey, v -> v.toString()));
+    }
+
+    @Override
+    public Iterable<QDocument> findAll() {
+        return template.queryForList("select * from qdoc", QDocument.class);
     }
 }

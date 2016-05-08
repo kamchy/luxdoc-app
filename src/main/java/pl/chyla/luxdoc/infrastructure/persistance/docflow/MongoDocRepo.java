@@ -3,9 +3,7 @@ package pl.chyla.luxdoc.infrastructure.persistance.docflow;
 import pl.chyla.luxdoc.application.docflow.DocRepo;
 import pl.chyla.luxdoc.application.docflow.QDocument;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 
 public class MongoDocRepo implements DocRepo {
@@ -21,5 +19,10 @@ public class MongoDocRepo implements DocRepo {
     @Override
     public QDocument load(UUID docId) {
         return map.get(docId);
+    }
+
+    @Override
+    public Iterable<QDocument> findAll() {
+        return new ArrayList<>(map.values());
     }
 }

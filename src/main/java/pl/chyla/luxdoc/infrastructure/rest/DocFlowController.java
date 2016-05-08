@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import pl.chyla.luxdoc.application.docfinder.DocFinder;
 import pl.chyla.luxdoc.application.docflow.DocflowService;
+import pl.chyla.luxdoc.application.docflow.QDocument;
 
 import java.net.URI;
 import java.util.Map;
@@ -35,6 +36,17 @@ public class DocFlowController {
     Map<String, String> getDocument(@PathVariable("uuid") UUID uuid) {
         return docFinder.findOne(uuid);
     }
+
+    @RequestMapping("/randuuid")
+    UUID randUUID() {
+        return UUID.randomUUID();
+    }
+
+    @RequestMapping("/all")
+    Iterable<QDocument> getDocument() {
+        return docFinder.findAll();
+    }
+
 
     @RequestMapping("/{uuid}/{kind}")
     Map<String, String> getDocumentSimple(@PathVariable("uuid") UUID uuid, @PathVariable("kind") String kind) {
