@@ -16,9 +16,6 @@ import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.when;
 
-/**
- * Created by Luxoft on 4/27/2016.
- */
 
 
 public class DocflowServiceImplTest {

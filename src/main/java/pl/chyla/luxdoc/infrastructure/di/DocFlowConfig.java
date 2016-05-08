@@ -13,9 +13,6 @@ import pl.chyla.luxdoc.application.docflow.DocflowServiceImpl;
 import pl.chyla.luxdoc.application.docflow.event.EventBus;
 import pl.chyla.luxdoc.application.sec.CurrentUserProvider;
 
-/**
- * Created by Luxoft on 4/27/2016.
- */
 
 @Configuration
 public class DocFlowConfig {

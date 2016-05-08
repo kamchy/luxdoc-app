@@ -8,9 +8,6 @@ import pl.chyla.luxdoc.application.sec.CurrentUserProvider;
 
 import java.util.UUID;
 
-/**
- * Created by Luxoft on 4/27/2016.
- */
 public class DocflowServiceImpl implements DocflowService {
     private final DefaultContentProvider contentProvider;
     private final EventBus bus;

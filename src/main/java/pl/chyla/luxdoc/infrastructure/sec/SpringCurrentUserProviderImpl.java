@@ -7,9 +7,6 @@ import pl.chyla.luxdoc.application.sec.CurrentUserProvider;
 
 import java.util.Collection;
 
-/**
- * Created by Luxoft on 4/27/2016.
- */
 @Component
 public class SpringCurrentUserProviderImpl implements CurrentUserProvider {
 

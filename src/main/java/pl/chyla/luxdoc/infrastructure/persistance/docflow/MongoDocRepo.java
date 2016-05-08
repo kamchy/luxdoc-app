@@ -7,9 +7,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-/**
- * Created by Luxoft on 4/27/2016.
- */
 
 public class MongoDocRepo implements DocRepo {
 

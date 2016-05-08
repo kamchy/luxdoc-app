@@ -13,9 +13,6 @@ import java.net.URI;
 import java.util.Map;
 import java.util.UUID;
 
-/**
- * Created by Luxoft on 4/27/2016.
- */
 @RestController
 @RequestMapping("/documents")
 public class DocFlowController {
